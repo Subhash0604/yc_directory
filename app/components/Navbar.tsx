@@ -1,18 +1,45 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { auth } from '@/auth'
+import { signIn, signOut } from 'next-auth/react'
 
-const Navbar = () => {
+const Navbar = async() => {
+  const session = await auth();
   return (
-    <div>
-      <h1 className="px-5 py-3 bg-white shadow-sm font-work-sans">navbar</h1>
+    <header className="px-5 py-3 bg-white shadow-sm font-work-sans">
       <nav className="flex justify-between items-center">
         <Link href="/">
-         <Image src="/logo.png" alt="logo" width={144} height={30}></Image>
+          <Image src="/logo.png" alt="logo" width={144} height={30}></Image>
         </Link>
+        <div className="flex item-center gap-5 text-black">
+          {session && session?.user ? (
+            <>
+            <Link href="startup/create" >
+                <span>Create</span>
+            </Link>
+            <form action={async() => {
+              "use server";
+              await signOut();
+            }}>
+              <button>logout</button>
+            </form>
+            <Link href={`/user/${session?.user?.name}`} >
+                 <span>{session?.user?.name}</span>
+            </Link>
+            </>
+          ) : (
+            <form action={async() => {
+              "use server";
+              await signIn('github')}}>
+                <button type='submit'>Login</button>
+              </form>
+          )}
+        </div>
       </nav>
-    </div>
-  )
+    </header>
+  );
 }
+
 
 export default Navbar
