@@ -7,6 +7,7 @@ import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ query: string }>
 }) {
+  //extracted queries
   const query = (await searchParams).query;
   const params = { search: query || null };
 
