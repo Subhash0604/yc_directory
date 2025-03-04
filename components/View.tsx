@@ -12,6 +12,7 @@ const View = async({ id }:{ id:string }) => {
        </div>
 
        <p className='view-text'>
+        //challenge to make a function that will define whether not to put in 's' in view when there is only one view 
         <span className='font-black'>{totalViews} views</span>
        </p>
     </div>
