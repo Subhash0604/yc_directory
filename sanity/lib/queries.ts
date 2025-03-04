@@ -30,3 +30,7 @@ export const STARTUP_QUERY_BY_ID = (`*[_type == "startup" && _id == $id][0]{
     pitch
   
 }`);
+
+export const STARTUP_VIEWS_QUERY = `*[_type == "startup" && _id == $id][0]{
+   _id,views
+}`

@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import { hostname } from "os";
 
 const nextConfig: NextConfig = {
   /* config opt ions here */
@@ -11,6 +10,14 @@ const nextConfig: NextConfig = {
         hostname: '*',
       }
     ]
+  },
+  experimental: {
+    ppr: false
+  },
+  devIndicators: {
+    // appIsrStatus:true,
+    buildActivity:true,
+    buildActivityPosition:'bottom-right',
   }
 };
 

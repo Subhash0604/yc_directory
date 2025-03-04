@@ -2,17 +2,19 @@ import { formatDate } from '@/lib/utils';
 import { client } from '@/sanity/lib/client';
 import { STARTUP_QUERY_BY_ID } from '@/sanity/lib/queries';
 import { notFound } from 'next/navigation';
-import React from 'react'
+import React, { Suspense } from 'react'
 import Link from 'next/link';
 import Image from 'next/image';
 import markdownit from 'markdown-it'; 
+import { Skeleton } from '@/components/ui/skeleton';
+import View from '@/components/View';
 
 const md = markdownit();
 
 export const experimental_ppr = true;
 
 
-const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+const page = async ({ params }: { params: { id: string } }) => {
   const id = (await params).id;
 
   const post = await client.fetch(STARTUP_QUERY_BY_ID, { id });
@@ -39,7 +41,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           <div className='flex-between gap-5'>
             <Link href={`/user/${post.author?._id}`}
               className='flex gap-2 items-center mb-3'>
-              <Image src={post.author.image}
+              <Image src={post.author?.image || '/fallback-avatar.png'}
                 alt="avatar"
                 width={64}
                 height={64}
@@ -64,6 +66,10 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         <hr className='divider' />
         {}
       </section>
+          
+        <Suspense fallback={<Skeleton className='view-skeleton'/>}>
+          <View id={id}/>
+        </Suspense>
     </>
   )
 }
