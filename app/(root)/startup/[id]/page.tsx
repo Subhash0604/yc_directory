@@ -15,8 +15,9 @@ export const experimental_ppr = true;
 
 
 const page = async ({ params }: { params: { id: string } }) => {
-  const id = (await params).id;
+const id = (await params).id;
 
+ 
   const post = await client.fetch(STARTUP_QUERY_BY_ID, { id });
 
   if (!post) return notFound();
