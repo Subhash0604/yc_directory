@@ -2,15 +2,15 @@ import NextAuth from "next-auth"
 import GitHub from "next-auth/providers/github"
 import { client } from "./sanity/lib/client"
 import { AUTHOR_BY_GITHUB_ID_QUERY } from "./sanity/lib/queries"
-import { profile } from "console"
+
 import { writeClient } from "./sanity/lib/write-client"
-import { token } from "./sanity/env"
+import { token } from "@/sanity/env"
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [GitHub],
   callbacks:{
     async signIn({
-      user: { name, email, image },
+      user: { name, email,image },
       profile: { id, login, bio },
     }) {
 
@@ -42,6 +42,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           .fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
             id: profile?.id,
           });
+
+          token.id = user?._id;
       }
 
       return token;

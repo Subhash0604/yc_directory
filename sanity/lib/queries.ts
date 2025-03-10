@@ -35,8 +35,7 @@ export const STARTUP_VIEWS_QUERY = `*[_type == "startup" && _id == $id][0]{
    _id,views
 }`
 
-export const AUTHOR_BY_GITHUB_ID_QUERY = `*[_type == "author && ud == $id][0]]{
-
+export const AUTHOR_BY_GITHUB_ID_QUERY = `*[_type == "user" && id == $id][0]{
     _id,
     id,
     name,
@@ -44,5 +43,4 @@ export const AUTHOR_BY_GITHUB_ID_QUERY = `*[_type == "author && ud == $id][0]]{
     email,
     image,
     bio
-
 }`
