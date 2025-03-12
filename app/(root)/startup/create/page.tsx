@@ -12,6 +12,9 @@ const page =  async() => {
         <h1 className="headings">
             Submit your Startup
         </h1>
+   <p>
+     Pitch to your startups
+   </p>
     </section>
 
     <StartupForm/>
