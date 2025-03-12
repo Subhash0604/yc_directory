@@ -1,7 +1,6 @@
 const page = () => {
   return (
     <>
-    //create startup forms 
     <section className="pink_container !min-h-[230px]">
         <h1 className="headings">
             Submit your Startup
