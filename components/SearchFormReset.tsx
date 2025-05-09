@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link';
 import { X } from 'lucide-react';
 
-
+//this was coming from sanity which fetches the data
 const SearchFormReset = () => {
     const reset = () => {
         const form = document.querySelector('.search-form') as HTMLFormElement;
