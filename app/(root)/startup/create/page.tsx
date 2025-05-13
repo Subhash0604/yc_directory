@@ -9,12 +9,9 @@ const page =  async() => {
   return (
     <>
     <section className="pink_container !min-h-[230px]">
-        <h1 className="headings">
+        <h1 className="heading">
             Submit your Startup
         </h1>
-   <p>
-     Pitch to your startups
-   </p>
     </section>
 
     <StartupForm/>
