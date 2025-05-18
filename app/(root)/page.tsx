@@ -8,7 +8,7 @@ import { auth } from "@/auth";
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ query: string }>
 }) {
-  //extracted queries from sanity
+  //extracted queries 
   const query = (await searchParams).query;
   const params = { search: query || null };
 
