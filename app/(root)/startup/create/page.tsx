@@ -13,7 +13,7 @@ const page =  async() => {
             Submit your Startup
         </h1>
     </section>
-
+   
     <StartupForm/>
     </>
   )
