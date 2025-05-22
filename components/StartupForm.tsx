@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useActionState, useState } from 'react';
+import React, { use, useActionState, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import MDEditor from '@uiw/react-md-editor';
@@ -8,11 +8,19 @@ import { Send } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { formSchema } from '@/lib/validation';
 import { z } from 'zod';
+import { useToast } from '@/hooks/use-toast';
+// import { Toast } from '@/components/ui/toast';
+import { useRouter } from 'next/navigation';
 
 
 const StartupForm = () => {
-
+    
     const [errors,setErrors] = useState<Record<string,string>>({});
+    const [pitch, setPitch] = useState("");
+
+    const { toast } = useToast();
+     const  router = useRouter();
+
     const handleFormSubmit =  async (preState: any, formData:FormData) => {
         try{
             const formValues = {
@@ -29,6 +37,16 @@ const StartupForm = () => {
 
             // const result = await createIdea(preState,formData,pitch);
 
+            // if(result.success == 'SUCCESS'){
+            //     toast({
+            //         title:'Success',
+            //         description:'Your Pitch has been Submitted Successfully'
+            //     });
+
+            //     router.push(`/startups/${result.id}`);
+            // }
+
+            // return result;
 
         }
         catch(error){
@@ -36,15 +54,26 @@ const StartupForm = () => {
                 const  fieldErrors = error.flatten().fieldErrors;
 
                 setErrors(fieldErrors as unknown as Record<string, string>);
+                
+                toast({
+                    title: 'Error',
+                    description: 'Please check yout inputs and try again',
+                    variant: 'destructive',
+                })
 
                 return { ...preState,error:"Validation Failed",stauts:'ERROR'};
              }
+             toast({
+                    title: 'Error',
+                    description: 'Unexpected Error',
+                    variant: 'destructive',
+                });
+
              return{ ...preState, error:"Unexpected Error", status:"ERROR"};
         }
 
     };
 
-    const [pitch, setPitch] = useState("");
     // <Record<string,string>></Record>
  
     const [state, formAction, isPending] = useActionState(handleFormSubmit, {error: ' ', status: 'INITIAL'});
@@ -94,13 +123,13 @@ const StartupForm = () => {
 
 
        <div>
-       <label htmlFor="link" className='startup-form_label'>Link</label>
+       <label htmlFor="link" className='startup-form_label'>Image Url</label>
         <Input 
         id='link' 
         name='link'
         className='startup-form_input'
         required 
-        placeholder='Startup link'/>
+        placeholder='Startup Image Url'/>
 
         {errors.link && <p className='startup-form_error'>{errors.link}</p>}
        </div>

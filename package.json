@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.2",
+    "@radix-ui/react-toast": "^1.2.14",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.76.3",
     "@tailwindcss/typography": "^0.5.16",
