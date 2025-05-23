@@ -35,6 +35,8 @@ const StartupForm = () => {
             // if the values are not valid, it will throw an error
             await formSchema.parseAsync(formValues);
 
+            console.log(formData);
+
             // const result = await createIdea(preState,formData,pitch);
 
             // if(result.success == 'SUCCESS'){
